@@ -12,6 +12,10 @@ Brent Waters (Pairing-based)
 
 :Authors:    J Ayo Akinyele
 :Date:       12/2012
+
+:Modified by Christopher A. Wood
+:Date: 6/30/15
+
 '''
 from charm.toolbox.pairinggroup import PairingGroup,ZR,G1,G2,GT,pair
 from charm.toolbox.DFA import DFA
@@ -126,12 +130,14 @@ def main():
     M = group.random(GT)
     ct = fe.encrypt(mpk, w, M)
 
+    # Explicitly override the string with another valid string
     ct[1] = w1
     print w1 == w
+
     origM = fe.decrypt(sk, ct)
     assert M == origM, "failed decryption!"
     if debug: print("Successful Decryption!!!!!")
 
 if __name__ == "__main__":
     debug = True
-    main()    
+    main()
